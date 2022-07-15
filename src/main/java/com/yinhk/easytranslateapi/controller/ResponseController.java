@@ -14,29 +14,21 @@ import com.yinhk.easytranslateapi.pojo.InfoDto;
 import com.yinhk.easytranslateapi.pojo.TranslationDataDto;
 import com.yinhk.easytranslateapi.service.TranslationClient;
 
-
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @Validated
 @RequestMapping("/")
 public class ResponseController {
-	
+
 	@Autowired
 	private TranslationClient translationClient;
-	
-	//@GetMapping("/translate")
+
 	@PostMapping("/translate")
-	public TranslationDataDto getTranslate(
-			@RequestBody InfoDto infoDto
-			//@RequestParam(value = "query", required = true) String q,
-			//@RequestParam(value = "source", required = true) String source,
-			//@RequestParam(value = "target", required = true) String target
-			) {	
+	public TranslationDataDto getTranslate(@RequestBody InfoDto infoDto) {
 		String q = infoDto.getQuery();
 		String source = infoDto.getSource();
 		String target = infoDto.getTarget();
 		return translationClient.requestTranslation(q, source, target);
 	}
-			
-		
+
 }
